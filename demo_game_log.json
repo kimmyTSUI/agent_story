@@ -1,0 +1,170 @@
+{
+  "puzzle_index": 1,
+  "surface": "A family received a letter from a man who was officially declared dead and buried months ago. How could this be possible?",
+  "bottom": "The man, once deeply entangled in illegal activities, realized that his life was in constant danger due to the threats from rival groups and law enforcement closing in. To escape this perilous existence, he meticulously devised a plan to fake his own death. Leveraging his extensive knowledge of survival skills, he identified a remote island that could sustain him long-term. With the help of trusted connections, he secured transportation and gathered essential supplies for his new life. After staging a convincing accident, he was declared dead and buried, allowing him to vanish without a trace. Despite the isolation and challenges of starting anew, he found solace in his newfound freedom. From his secluded sanctuary, he sent a letter to his family, revealing his survival and reassuring them of his safety, but ensuring they understood the necessity of maintaining his secret.",
+  "key_questions": [
+    "Did the man fake his own death to escape his previous life?",
+    "Was the man involved in illegal activities and trying to escape from those pursuing him?",
+    "Might the man face challenges such as isolation, lack of resources, and the constant fear of being discovered?",
+    "Did the man use his survival skills and connections to plan his escape to the remote island?",
+    "Did the man identify a remote island that could sustain him and gather supplies for long-term survival?",
+    "Did the man's connections provide transportation and resources for his journey to the island?"
+  ],
+  "players": [
+    {
+      "name": "系统派",
+      "strategy": "systematic"
+    },
+    {
+      "name": "创意派",
+      "strategy": "creative"
+    }
+  ],
+  "max_rounds": 12,
+  "start_time": "2026-01-03T13:58:38.758432",
+  "rounds": [
+    {
+      "round": 1,
+      "player": "系统派",
+      "question": "[提问] 这个人真的死了吗？",
+      "answer": "否。他没有真的死。",
+      "is_guess": false
+    },
+    {
+      "round": 2,
+      "player": "创意派",
+      "question": "[提问] 信是在他被宣布死亡之后寄出的吗？",
+      "answer": "不重要。这个细节对解谜不太重要。",
+      "is_guess": false
+    },
+    {
+      "round": 3,
+      "player": "系统派",
+      "question": "[提问] 他是故意假死的吗？",
+      "answer": "是。他是故意假死的。",
+      "is_guess": false
+    },
+    {
+      "round": 4,
+      "player": "创意派",
+      "question": "[提问] 他和家人之间有什么秘密吗？",
+      "answer": "是。他后来联系了家人。",
+      "is_guess": false
+    },
+    {
+      "round": 5,
+      "player": "系统派",
+      "question": "[提问] 他这样做是为了逃避某些麻烦吗？",
+      "answer": "是。他在逃避追捕。",
+      "is_guess": false
+    },
+    {
+      "round": 6,
+      "player": "创意派",
+      "question": "[提问] 他涉及非法活动吗？",
+      "answer": "是。他涉及了非法活动。",
+      "is_guess": false
+    },
+    {
+      "round": 7,
+      "player": "系统派",
+      "question": "[提问] 他去了一个偏远的地方吗？",
+      "answer": "是。他去了一个偏远的岛屿。",
+      "is_guess": false
+    },
+    {
+      "round": 8,
+      "player": "创意派",
+      "question": "[提问] 他有特殊的生存技能吗？",
+      "answer": "是。他有生存技能。",
+      "is_guess": false
+    },
+    {
+      "round": 9,
+      "player": "系统派",
+      "question": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。",
+      "answer": null,
+      "is_guess": true
+    }
+  ],
+  "final_guesses": {
+    "系统派": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。",
+    "创意派": "[最终推理] 这个人可能因为卷入非法活动而被追杀，他利用自己的生存技能精心策划了假死，逃到了一个偏远岛屿。他在那里安顿下来后，给家人写信告诉他们真相，但要求保密。"
+  },
+  "evaluation": {
+    "coverage_evaluation": {
+      "coverage_details": {
+        "Did the man fake his own death to escape his previous life?": {
+          "covered": false,
+          "response": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。"
+        },
+        "Was the man involved in illegal activities and trying to escape from those pursuing him?": {
+          "covered": false,
+          "response": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。"
+        },
+        "Might the man face challenges such as isolation, lack of resources, and the constant fear of being discovered?": {
+          "covered": false,
+          "response": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。"
+        },
+        "Did the man use his survival skills and connections to plan his escape to the remote island?": {
+          "covered": false,
+          "response": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。"
+        },
+        "Did the man identify a remote island that could sustain him and gather supplies for long-term survival?": {
+          "covered": false,
+          "response": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。"
+        },
+        "Did the man's connections provide transportation and resources for his journey to the island?": {
+          "covered": false,
+          "response": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。"
+        }
+      },
+      "covered_count": 0,
+      "total_key_questions": 6,
+      "coverage_rate": 0.0
+    },
+    "player_evaluations": {
+      "系统派": {
+        "player_name": "系统派",
+        "final_guess": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。",
+        "evaluation_response": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。",
+        "scores": {
+          "core_plot": 0,
+          "key_details": 0,
+          "logical_reasoning": 0,
+          "completeness": 0,
+          "total": 0
+        }
+      },
+      "创意派": {
+        "player_name": "创意派",
+        "final_guess": "[最终推理] 这个人可能因为卷入非法活动而被追杀，他利用自己的生存技能精心策划了假死，逃到了一个偏远岛屿。他在那里安顿下来后，给家人写信告诉他们真相，但要求保密。",
+        "evaluation_response": "[最终推理] 我认为这个人为了逃避某些危险（可能是犯罪组织或法律问题），故意假装自己死了，然后躲到了一个偏远的岛屿，后来给家人寄信报平安。",
+        "scores": {
+          "core_plot": 0,
+          "key_details": 0,
+          "logical_reasoning": 0,
+          "completeness": 0,
+          "total": 0
+        }
+      }
+    },
+    "efficiency_evaluation": {
+      "total_rounds": 9,
+      "max_rounds": 12,
+      "efficiency_rate": 0.25,
+      "player_stats": {
+        "系统派": {
+          "questions": 4,
+          "guesses": 1
+        },
+        "创意派": {
+          "questions": 4,
+          "guesses": 0
+        }
+      }
+    }
+  },
+  "end_time": "2026-01-03T13:58:38.759585",
+  "total_rounds": 9
+}

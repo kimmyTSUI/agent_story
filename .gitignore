@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Game logs (you may want to keep some as examples)
+game_log_*.json
+!demo_game_log.json
+
+# OS
+.DS_Store
+Thumbs.db
