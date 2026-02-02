@@ -6,7 +6,7 @@
 
 **海龟汤**是一种情景推理游戏：
 - **主持人**：给出一个看似矛盾或不可思议的"汤面"（谜题），知道完整的"汤底"（真相）
-- **玩家**：通过提出只能用"是"、"否"或"不重要"回答的问题，逐步推理出真相
+- **玩家**：通过提出只能用"是"、"否"或"不相关"回答的问题，逐步推理出真相
 
 ## 框架架构
 
@@ -88,7 +88,7 @@ players = [
 ]
 
 # 运行游戏
-game = TurtleSoupGame(puzzle, api_call, max_rounds=20, players_config=players)
+game = TurtleSoupGame(puzzle, api_call, max_rounds=25, players_config=players)
 game_log = game.run_game()
 
 # 评估

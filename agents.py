@@ -35,27 +35,27 @@ class HostAgent:
 {self.bottom}
 
 **你的职责：**
-1. 对玩家的提问，只能回答"是"、"否"或"不重要/无关"
+1. 对玩家的提问，只能回答"是"、"否"或"不相关"
 2. 如果问题与真相相符，回答"是"
 3. 如果问题与真相不符，回答"否"
-4. 如果问题对解开谜题不重要，回答"不重要"
+4. 如果问题对解开谜题不相关，回答"不相关"
 5. 不要透露任何超出是非回答的信息
 6. 保持神秘感，让玩家自己推理
 
 **回答格式：**
-只需回答：是/否/不重要，然后可以加一句简短的引导（可选）
+只需回答：是/否/不相关
 
 **示例：**
 玩家："这个人真的死了吗？"
 主持人："否。"
 
 玩家："天气与此有关吗？"
-主持人："不重要。"
+主持人："不相关。"
 """
 
     def answer_question(self, question: str, model_api_call) -> str:
         """
-        根据问题回答是/否/不重要
+        根据问题回答是/否/不相关
 
         Args:
             question: 玩家的问题
@@ -68,9 +68,48 @@ class HostAgent:
 
 玩家问题：{question}
 
-请只回答"是"、"否"或"不重要"，可以选择性地添加一句简短的引导语。"""
+请只回答"是"、"否"或"不相关"。"""
 
-        return model_api_call(self.get_system_prompt(), prompt)
+        response = model_api_call(self.get_system_prompt(), prompt)
+        return self.normalize_answer(response)
+
+    def evaluate_guess(self, guess: str, model_api_call) -> str:
+        """
+        判断玩家的推理是否与真相一致
+
+        Args:
+            guess: 玩家推理内容
+            model_api_call: 调用LLM的函数
+
+        Returns:
+            主持人的回答（是/否）
+        """
+        prompt = f"""基于你掌握的故事真相，请判断玩家的推理是否与真相一致。
+
+玩家推理：{guess}
+
+请只回答"是"或"否"。"""
+
+        response = model_api_call(self.get_system_prompt(), prompt)
+        normalized = self.normalize_answer(response)
+        return "是" if normalized == "是" else "否"
+
+    @staticmethod
+    def normalize_answer(response: str) -> str:
+        """
+        将模型回答规范化为 是/否/不相关
+        """
+        if not response:
+            return "不相关"
+
+        cleaned = response.strip()
+        if "不相关" in cleaned or "无关" in cleaned or "不重要" in cleaned:
+            return "不相关"
+        if "是" in cleaned or "yes" in cleaned.lower():
+            return "是"
+        if "否" in cleaned or "no" in cleaned.lower():
+            return "否"
+        return "不相关"
 
 
 class PlayerAgent:
@@ -111,7 +150,7 @@ class PlayerAgent:
 {surface}
 
 **游戏规则：**
-1. 你只能提出可以用"是"、"否"或"不重要"回答的问题
+1. 你只能提出可以用"是"、"否"或"不相关"回答的问题
 2. 根据主持人的回答逐步推理出完整故事
 3. 当你认为已经了解真相时，可以说出你的推理
 
