@@ -18,7 +18,7 @@ class TurtleSoupGame:
         self,
         puzzle_data: Dict,
         model_api_call: Callable,
-        max_rounds: int = 20,
+        max_rounds: int = 25,
         players_config: Optional[List[Dict]] = None
     ):
         """
@@ -61,7 +61,8 @@ class TurtleSoupGame:
             "start_time": datetime.now().isoformat(),
             "rounds": [],
             "final_guesses": {},
-            "evaluation": {}
+            "evaluation": {},
+            "winner": None
         }
 
     def play_round(self, player_idx: int) -> Dict:
@@ -93,14 +94,18 @@ class TurtleSoupGame:
         is_guess = "[推理]" in player_response or "[最终推理]" in player_response
 
         if is_guess:
-            # 玩家给出了推理，不需要主持人回答
+            # 玩家给出了推理，主持人判断是否正确
+            host_answer = self.host.evaluate_guess(player_response, self.model_api_call)
+            print(f"主持人: {host_answer}")
             round_info = {
                 "round": self.current_round + 1,
                 "player": player.player_name,
                 "question": player_response,
-                "answer": None,
-                "is_guess": True
+                "answer": host_answer,
+                "is_guess": True,
+                "guess_correct": host_answer == "是"
             }
+            self.conversation_history.append(round_info)
         else:
             # 主持人回答
             host_answer = self.host.answer_question(player_response, self.model_api_call)
@@ -111,7 +116,8 @@ class TurtleSoupGame:
                 "player": player.player_name,
                 "question": player_response,
                 "answer": host_answer,
-                "is_guess": False
+                "is_guess": False,
+                "guess_correct": False
             }
 
             self.conversation_history.append(round_info)
@@ -138,33 +144,42 @@ class TurtleSoupGame:
         # 游戏主循环
         player_idx = 0
         game_ended = False
+        correct_guess = None
 
         while self.current_round < self.max_rounds and not game_ended:
             round_info = self.play_round(player_idx)
 
-            # 检查是否有玩家给出了推理
+            # 检查是否有玩家给出了正确推理
             if round_info.get("is_guess", False):
                 print(f"\n{self.players[player_idx].player_name} 给出了推理！")
-                game_ended = True
-                break
+                if round_info.get("guess_correct", False):
+                    print(f"{self.players[player_idx].player_name} 猜中真相，游戏暂停！")
+                    self.game_log["winner"] = self.players[player_idx].player_name
+                    correct_guess = round_info.get("question")
+                    game_ended = True
+                    break
 
             # 轮换玩家
             player_idx = (player_idx + 1) % len(self.players)
 
-        # 游戏结束，让所有玩家给出最终推理
-        print(f"\n{'#'*60}")
-        print("游戏结束！请各位玩家给出最终推理")
-        print(f"{'#'*60}")
+        # 游戏结束，让所有玩家给出最终推理（若无人猜中）
+        if not self.game_log["winner"]:
+            print(f"\n{'#'*60}")
+            print("游戏结束！请各位玩家给出最终推理")
+            print(f"{'#'*60}")
 
-        for player in self.players:
-            final_guess = player.make_final_guess(
-                self.puzzle_data["surface"],
-                self.conversation_history,
-                self.model_api_call
-            )
-            print(f"\n{player.player_name} 的最终推理：")
-            print(final_guess)
-            self.game_log["final_guesses"][player.player_name] = final_guess
+            for player in self.players:
+                final_guess = player.make_final_guess(
+                    self.puzzle_data["surface"],
+                    self.conversation_history,
+                    self.model_api_call
+                )
+                print(f"\n{player.player_name} 的最终推理：")
+                print(final_guess)
+                self.game_log["final_guesses"][player.player_name] = final_guess
+        else:
+            winner = self.game_log["winner"]
+            self.game_log["final_guesses"][winner] = correct_guess or "已在对局中猜中真相。"
 
         # 显示真相
         print(f"\n{'#'*60}")

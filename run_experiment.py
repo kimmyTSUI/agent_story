@@ -123,7 +123,7 @@ def create_mock_api_call() -> Callable:
         # 根据提示内容返回不同的模拟响应
         if "主持人" in system_prompt:
             # 模拟主持人回答
-            responses = ["是。", "否。", "不重要。"]
+            responses = ["是。", "否。", "不相关。"]
             return responses[call_count[0] % 3]
         elif "玩家" in system_prompt:
             # 模拟玩家提问
@@ -147,7 +147,7 @@ def create_mock_api_call() -> Callable:
 def run_single_game(
     puzzle_data: Dict,
     model_api_call: Callable,
-    max_rounds: int = 20,
+    max_rounds: int = 25,
     players_config: list = None,
     save_log: bool = True,
     log_path: str = None
@@ -230,7 +230,7 @@ def main():
         {"name": "Player1", "strategy": "systematic"},
         {"name": "Player2", "strategy": "creative"}
     ]
-    max_rounds = 20
+    max_rounds = 25
 
     # 4. 运行游戏
     print("\n" + "="*60)
