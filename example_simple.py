@@ -20,7 +20,7 @@ def simple_mock_api(system_prompt: str, user_prompt: str) -> str:
         elif "犯罪" in user_prompt or "illegal" in user_prompt.lower():
             return "是。"
         else:
-            return "不重要。"
+            return "不相关。"
     elif "最终推理" in user_prompt:
         return "[最终推理] 基于对话，我认为这个人假装自己死了，可能是为了逃避某些麻烦，然后躲到了一个偏远的岛屿，后来给家人寄了信报平安。"
     else:
@@ -45,7 +45,7 @@ def main():
     game = TurtleSoupGame(
         puzzle_data=puzzle_data,
         model_api_call=simple_mock_api,
-        max_rounds=10,
+        max_rounds=25,
         players_config=players_config
     )
 
