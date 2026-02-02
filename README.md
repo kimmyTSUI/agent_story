@@ -116,6 +116,16 @@ game.save_game_log("my_game_log.json")
 }
 ```
 
+## 如何使用 surface 和 bottom
+
+在框架中，`surface` 是“汤面”，仅提供给玩家作为已知信息；`bottom` 是“汤底/真相”，只提供给主持人用于判断问题和评估推理。典型用法如下：
+
+1. **主持人使用 `bottom` 回答是非问题**：`HostAgent` 在系统提示里包含 `surface` 与 `bottom`，只允许回复“是/否/不相关”。【F:agents.py†L27-L112】
+2. **玩家只看到 `surface` 并提问**：`PlayerAgent` 的系统提示只包含 `surface`，玩家据此提出是非问题或推理。【F:agents.py†L132-L202】
+3. **游戏控制器负责分发信息**：`TurtleSoupGame` 把 `surface` 传给玩家，把完整谜题（含 `bottom`）交给主持人，并在回合中调用主持人答复或判断推理。【F:game_controller.py†L17-L194】
+
+实际使用示例（从 `test.json` 读取 `surface`/`bottom` 并运行）可参考 README 中的完整示例代码。【F:README.md†L67-L101】
+
 ## 评估指标
 
 框架会自动评估以下方面：
